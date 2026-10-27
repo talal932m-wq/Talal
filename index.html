@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلال المخير - الذكاء الاصطناعي الخفيف واللطيف</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            height: 80vh;
+            background: #1e293b;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+        .chat-header {
+            background: #3b82f6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+        .message.bot {
+            background: #334155;
+            align-self: flex-start;
+            color: #f1f5f9;
+        }
+        .message.user {
+            background: #3b82f6;
+            align-self: flex-end;
+            color: white;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background: #0f172a;
+            border-top: 1px solid #334155;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #475569;
+            background: #1e293b;
+            color: white;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+        }
+        .chat-input-area button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            margin-right: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .chat-input-area button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            ☕ طلال المخير - الذكاء الاصطناعي الخفيف
+        </div>
+        <div class="chat-messages" id="messages">
+            <div class="message bot">أهلاً بك يا غالي! أنا <strong>طلال المخير</strong>، مساعدك الذكي والخفيف على القلب. تفضل اسأل أو اطلب اللي تحب، جاهز معك بكل صراحة وراحة! ☕✨</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="اكتب رسالتك هنا..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">إرسال</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const messages = document.getElementById('messages');
+            const text = input.value.trim();
+
+            if (text === '') return;
+
+            // إضافة رسالة المستخدم
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = text;
+            messages.appendChild(userMsg);
+
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            // رد طلال المخير التفاعلي البسيط
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.textContent = getTalalResponse(text);
+                messages.appendChild(botMsg);
+                messages.scrollTop = messages.scrollHeight;
+            }, 600);
+        }
+
+        function getTalalResponse(query) {
+            const replies = [
+                "أبشر بسُمك يا غالي، وصلتك الفكرة وزبطناها!",
+                "يا سلام عليك وعلى طاريحك الحلوة، دايماً مبدع يا طلال.",
+                "من عيوني الثنتين، خلنا نخلص الموضوع بخفة وسرعة بدون تعقيد.",
+                "حاضرين للطيبين، فكرة ممتازة وتستاهل التنفيذ فوراً!",
+                "ههههههه حلوة منك! جالس أستوعبها وأقول أبشر باللي يرضيك."
+            ];
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>
